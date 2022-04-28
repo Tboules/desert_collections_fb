@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { doc, DocumentReference, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -20,3 +20,7 @@ export const cAuth = getAuth(app);
 export const cdb = getFirestore(app);
 export const fbStore = getStorage(app);
 export const googleAuthProvider = new GoogleAuthProvider();
+
+export function createDocRef<T>(col: string, id: string) {
+  return doc(cdb, col, id) as DocumentReference<T>;
+}

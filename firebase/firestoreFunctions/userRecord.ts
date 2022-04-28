@@ -1,27 +1,16 @@
 import { UserCredential } from "firebase/auth";
-import {
-  doc,
-  DocumentReference,
-  getDoc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { cdb } from "../clientConfig";
+import { getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { createDocRef } from "../clientConfig";
 
 export async function createUserRecord(res: UserCredential) {
-  const docRef = doc(
-    cdb,
-    "users",
-    res.user.uid
-  ) as DocumentReference<UserRecord>;
+  const docRef = createDocRef<UserRecord>("users", res.user.uid);
 
   try {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      return;
     } else {
-      // doc.data() will be undefined in this case
       await setDoc(docRef, {
         displayName: res.user.displayName,
         email: res.user.email,
@@ -30,6 +19,19 @@ export async function createUserRecord(res: UserCredential) {
         uid: res.user.uid,
         contributions: 0,
       });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getUserRecord(res: UserCredential) {
+  const docRef = createDocRef<UserRecord>("users", res.user.uid);
+
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
     }
   } catch (error) {
     console.log(error);
