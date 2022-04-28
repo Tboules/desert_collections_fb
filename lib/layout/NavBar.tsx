@@ -1,24 +1,28 @@
 import { signInWithPopup } from "firebase/auth";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
+import { createUserRecord } from "../../firebase/firestoreFunctions/userRecord";
 import { useUserContext } from "../context/UserContext";
 
-interface Props {}
-
-export default function NavBar(props: Props) {
-  const { dcUser } = useUserContext();
+export default function NavBar() {
+  const { dcUser, loading } = useUserContext();
 
   return (
     <nav className="nav-bar">
-      <h1>hello NavBar</h1>
-      {!dcUser ? <SignInButton /> : <SignOutButton />}
+      <h1>Desert Collections</h1>
+      {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
     </nav>
   );
 }
 
 function SignInButton() {
   const signInWithGoogle = async () => {
-    const res = await signInWithPopup(cAuth, googleAuthProvider);
-    console.log(res);
+    try {
+      const res = await signInWithPopup(cAuth, googleAuthProvider);
+
+      createUserRecord(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return <button onClick={signInWithGoogle}>Sign In</button>;

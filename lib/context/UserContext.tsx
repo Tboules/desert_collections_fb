@@ -1,11 +1,17 @@
+import { User } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { cAuth } from "../../firebase/clientConfig";
 
-export const UserContext = createContext<any>({});
+interface Props {
+  dcUser: User | null;
+  loading: boolean;
+}
+
+export const UserContext = createContext<Props | null>(null);
 
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [dcUser, setDcUser] = useState<any>();
+  const [dcUser, setDcUser] = useState<User | null>(null);
   const [user, loading, error] = useAuthState(cAuth);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, [user, loading, error]);
 
   return (
-    <UserContext.Provider value={{ dcUser, setDcUser }}>
+    <UserContext.Provider value={{ dcUser, loading }}>
       {children}
     </UserContext.Provider>
   );
