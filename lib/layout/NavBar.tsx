@@ -1,6 +1,6 @@
 import { signInWithPopup } from "firebase/auth";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
-import { createUserRecord } from "../../firebase/firestoreFunctions/userRecord";
+import { createUserRecord } from "../../firebase/queries/userRecord";
 import { useUserContext } from "../context/UserContext";
 
 export default function NavBar() {
