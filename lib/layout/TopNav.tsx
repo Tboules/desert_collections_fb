@@ -1,4 +1,4 @@
-import { Center, Header } from "@mantine/core";
+import { Button, Center, Header } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
 import { createUserRecord } from "../../firebase/queries/userRecord";
@@ -34,7 +34,7 @@ function SignInButton() {
     }
   };
 
-  return <button onClick={signInWithGoogle}>Sign In</button>;
+  return <Button onClick={signInWithGoogle}>Sign In</Button>;
 }
 
 function SignOutButton() {
@@ -42,5 +42,5 @@ function SignOutButton() {
     cAuth.signOut();
   };
 
-  return <button onClick={signOut}>Sign Out</button>;
+  return <Button onClick={signOut}>Sign Out</Button>;
 }

@@ -1,4 +1,4 @@
-import { AppShell, Header } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 import React from "react";
 import TopNav from "./TopNav";
 
