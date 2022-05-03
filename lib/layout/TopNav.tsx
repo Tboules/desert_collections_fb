@@ -1,4 +1,4 @@
-import { Button, Center, Header } from "@mantine/core";
+import { Button, Center, Header, Title } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
 import { createUserRecord } from "../../firebase/queries/userRecord";
@@ -17,7 +17,7 @@ export default function TopNav() {
         padding: "0px 1rem",
       }}
     >
-      <h1>Desert Collections</h1>
+      <Title>Desert Collections</Title>
       {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
     </Header>
   );

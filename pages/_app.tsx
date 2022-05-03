@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import Head from "next/head";
 import { useState } from "react";
+import { mantineTheme } from "../styles/mantineTheme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
@@ -28,14 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme: "light",
-          }}
-        >
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
