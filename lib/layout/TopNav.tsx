@@ -1,4 +1,4 @@
-import { Button, Center, Header, Title } from "@mantine/core";
+import { Button, Center, Group, Header, Switch, Title } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
 import { createUserRecord } from "../../firebase/queries/userRecord";
@@ -18,7 +18,10 @@ export default function TopNav() {
       }}
     >
       <Title>Desert Collections</Title>
-      {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
+      <Group>
+        {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
+        <Switch />
+      </Group>
     </Header>
   );
 }

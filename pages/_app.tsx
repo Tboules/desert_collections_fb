@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { UserContextProvider } from "../lib/context/UserContext";
 import { Layout } from "../lib/layout";
@@ -29,7 +28,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
-        <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme: colorScheme,
+            ...mantineTheme,
+          }}
+        >
           <Layout>
             <Component {...pageProps} />
           </Layout>
