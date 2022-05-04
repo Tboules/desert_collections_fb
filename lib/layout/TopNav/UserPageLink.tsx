@@ -7,7 +7,7 @@ export default function UserPageLink() {
   const router = useRouter();
   const { dcUser, loading } = useUserContext();
 
-  const variableUserRouting = () => {
+  const routeUser = () => {
     if (loading) return;
 
     if (!dcUser) {
@@ -23,7 +23,7 @@ export default function UserPageLink() {
       color="brandAccent"
       size={36}
       variant="outline"
-      onClick={variableUserRouting}
+      onClick={routeUser}
     >
       <User />
     </ActionIcon>

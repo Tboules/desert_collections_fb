@@ -30,9 +30,8 @@ export default function TopNav() {
       <LogoStack />
       <AppSearch />
       <Group spacing="xs">
-        {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
-        <UserPageLink />
         <ColorModeSwitcher />
+        <UserPageLink />
         <AddQuoteButton />
       </Group>
     </Header>
