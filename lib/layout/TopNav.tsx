@@ -1,7 +1,9 @@
-import { Button, Center, Group, Header, Switch, Title } from "@mantine/core";
+import { Button, Group, Header, Input, Text, Title } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
+import { Search } from "tabler-icons-react";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
 import { createUserRecord } from "../../firebase/queries/userRecord";
+import ColorModeSwitcher from "../components/ColorModeSwitcher";
 import { useUserContext } from "../context/UserContext";
 
 export default function TopNav() {
@@ -18,9 +20,23 @@ export default function TopNav() {
       }}
     >
       <Title>Desert Collections</Title>
+      <Input
+        rightSection={<Search color="gray" size={16} />}
+        placeholder="Search"
+        radius="sm"
+        styles={(theme) => ({
+          defaultVariant: {
+            "&:focus": { borderColor: theme.colors.brandAccent },
+          },
+          wrapper: {
+            width: "30%",
+            minWidth: "340px",
+          },
+        })}
+      />
       <Group>
         {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
-        <Switch />
+        <ColorModeSwitcher />
       </Group>
     </Header>
   );
