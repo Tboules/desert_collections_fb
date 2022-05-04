@@ -1,9 +1,11 @@
-import { Button, Group, Header, Input, Text, Title } from "@mantine/core";
+import { Button, Group, Header, Input } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
+
 import { Search } from "tabler-icons-react";
 import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
 import { createUserRecord } from "../../firebase/queries/userRecord";
 import ColorModeSwitcher from "../components/ColorModeSwitcher";
+import LogoStack from "../components/LogoStack";
 import { useUserContext } from "../context/UserContext";
 
 export default function TopNav() {
@@ -18,18 +20,20 @@ export default function TopNav() {
         justifyContent: "space-between",
         padding: "0px 1rem",
       }}
+      fixed
     >
-      <Title>Desert Collections</Title>
+      <LogoStack />
       <Input
         rightSection={<Search color="gray" size={16} />}
         placeholder="Search"
         radius="sm"
+        size="lg"
         styles={(theme) => ({
           defaultVariant: {
             "&:focus": { borderColor: theme.colors.brandAccent },
           },
           wrapper: {
-            width: "30%",
+            width: "40%",
             minWidth: "340px",
           },
         })}

@@ -4,7 +4,7 @@ interface Props {}
 
 const Home: NextPage<Props> = () => {
   return (
-    <div>
+    <div style={{ height: "2000px" }}>
       <h1>hello Home</h1>
     </div>
   );

@@ -1,11 +1,16 @@
-import { AppShell } from "@mantine/core";
+import { AppShell, Container } from "@mantine/core";
 import React from "react";
 import TopNav from "./TopNav";
+
+const containerStyles: React.CSSProperties = {
+  marginTop: "80px",
+  maxWidth: "1440px",
+};
 
 export const Layout: React.FC = ({ children }) => {
   return (
     <AppShell
-      padding="md"
+      padding={0}
       header={<TopNav />}
       styles={(theme) => ({
         main: {
@@ -16,7 +21,9 @@ export const Layout: React.FC = ({ children }) => {
         },
       })}
     >
-      {children}
+      <Container px={0} fluid style={containerStyles}>
+        {children}
+      </Container>
     </AppShell>
   );
 };
