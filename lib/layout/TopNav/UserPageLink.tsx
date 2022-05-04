@@ -1,14 +1,31 @@
 import { ActionIcon } from "@mantine/core";
+import { useRouter } from "next/router";
 import { User } from "tabler-icons-react";
+import { useUserContext } from "../../context/UserContext";
 
-interface Props {}
+export default function UserPageLink() {
+  const router = useRouter();
+  const { dcUser, loading } = useUserContext();
 
-export default function UserPageLink(props: Props) {
+  const variableUserRouting = () => {
+    if (loading) return;
+
+    if (!dcUser) {
+      router.push("/user/auth");
+    } else {
+      router.push(`/user/${dcUser.uid}`);
+    }
+  };
+
   return (
-    // <Link href="/user/auth" passHref>
-    <ActionIcon component="a" color="brandAccent" size={36} variant="outline">
+    <ActionIcon
+      component="a"
+      color="brandAccent"
+      size={36}
+      variant="outline"
+      onClick={variableUserRouting}
+    >
       <User />
     </ActionIcon>
-    // </Link>
   );
 }

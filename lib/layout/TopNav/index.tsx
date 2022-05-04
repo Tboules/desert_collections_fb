@@ -23,7 +23,7 @@ export default function TopNav() {
         backgroundColor:
           theme.colorScheme === "dark"
             ? "rgba(0, 0, 0, 0.92)"
-            : "rgba(255, 255, 255, 0.98)",
+            : "rgba(255, 255, 255, 0.95)",
       })}
       fixed
     >
