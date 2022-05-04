@@ -1,12 +1,11 @@
 import { Button, Group, Header, Input } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
-
 import { Search } from "tabler-icons-react";
-import { cAuth, googleAuthProvider } from "../../firebase/clientConfig";
-import { createUserRecord } from "../../firebase/queries/userRecord";
-import ColorModeSwitcher from "../components/ColorModeSwitcher";
-import LogoStack from "../components/LogoStack";
-import { useUserContext } from "../context/UserContext";
+import { cAuth, googleAuthProvider } from "../../../firebase/clientConfig";
+import { createUserRecord } from "../../../firebase/queries/userRecord";
+import ColorModeSwitcher from "../../components/ColorModeSwitcher";
+import LogoStack from "../../components/LogoStack";
+import { useUserContext } from "../../context/UserContext";
 
 export default function TopNav() {
   const { dcUser, loading } = useUserContext();
