@@ -1,11 +1,13 @@
-import { Button, Group, Header, Input } from "@mantine/core";
+import { Button, Group, Header } from "@mantine/core";
 import { signInWithPopup } from "firebase/auth";
-import { Search } from "tabler-icons-react";
 import { cAuth, googleAuthProvider } from "../../../firebase/clientConfig";
 import { createUserRecord } from "../../../firebase/queries/userRecord";
 import ColorModeSwitcher from "../../components/ColorModeSwitcher";
 import LogoStack from "../../components/LogoStack";
 import { useUserContext } from "../../context/UserContext";
+import AddQuoteButton from "./AddQuoteButton";
+import AppSearch from "./AppSearch";
+import UserPageLink from "./UserPageLink";
 
 export default function TopNav() {
   const { dcUser, loading } = useUserContext();
@@ -13,33 +15,25 @@ export default function TopNav() {
   return (
     <Header
       height={80}
-      sx={{
+      sx={(theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         padding: "0px 1rem",
-      }}
+        backgroundColor:
+          theme.colorScheme === "dark"
+            ? "rgba(0, 0, 0, 0.92)"
+            : "rgba(255, 255, 255, 0.98)",
+      })}
       fixed
     >
       <LogoStack />
-      <Input
-        rightSection={<Search color="gray" size={16} />}
-        placeholder="Search"
-        radius="sm"
-        size="lg"
-        styles={(theme) => ({
-          defaultVariant: {
-            "&:focus": { borderColor: theme.colors.brandAccent },
-          },
-          wrapper: {
-            width: "40%",
-            minWidth: "340px",
-          },
-        })}
-      />
-      <Group>
+      <AppSearch />
+      <Group spacing="xs">
         {!loading && (!dcUser ? <SignInButton /> : <SignOutButton />)}
+        <UserPageLink />
         <ColorModeSwitcher />
+        <AddQuoteButton />
       </Group>
     </Header>
   );
@@ -56,7 +50,11 @@ function SignInButton() {
     }
   };
 
-  return <Button onClick={signInWithGoogle}>Sign In</Button>;
+  return (
+    <Button color="brandAccent" variant="outline" onClick={signInWithGoogle}>
+      Sign In
+    </Button>
+  );
 }
 
 function SignOutButton() {
