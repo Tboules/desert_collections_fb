@@ -1,9 +1,9 @@
-import { UserCredential } from "firebase/auth";
+import { User, UserCredential } from "firebase/auth";
 import { getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { createDocRef } from "../clientConfig";
 
-export async function createUserRecord(res: UserCredential) {
-  const docRef = createDocRef<UserRecord>("users", res.user.uid);
+export async function createUserRecord(user: User) {
+  const docRef = createDocRef<UserRecord>("users", user.uid);
 
   try {
     const docSnap = await getDoc(docRef);
@@ -12,11 +12,11 @@ export async function createUserRecord(res: UserCredential) {
       return;
     } else {
       await setDoc(docRef, {
-        displayName: res.user.displayName,
-        email: res.user.email,
-        profileImg: res.user.photoURL,
+        displayName: user.displayName,
+        email: user.email,
+        profileImg: user.photoURL,
         joinedOn: serverTimestamp(),
-        uid: res.user.uid,
+        uid: user.uid,
         contributions: 0,
       });
     }
@@ -25,8 +25,8 @@ export async function createUserRecord(res: UserCredential) {
   }
 }
 
-export async function getUserRecord(res: UserCredential) {
-  const docRef = createDocRef<UserRecord>("users", res.user.uid);
+export async function getUserRecord(uid: string) {
+  const docRef = createDocRef<UserRecord>("users", uid);
 
   try {
     const docSnap = await getDoc(docRef);

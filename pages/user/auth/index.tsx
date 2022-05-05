@@ -32,29 +32,3 @@ const UserAuthPage: NextPage<Props> = () => {
 };
 
 export default UserAuthPage;
-
-// function SignInButton() {
-//   const signInWithGoogle = async () => {
-//     try {
-//       const res = await signInWithPopup(cAuth, googleAuthProvider);
-
-//       createUserRecord(res);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return (
-//     <Button color="brandAccent" variant="outline" onClick={signInWithGoogle}>
-//       Sign In
-//     </Button>
-//   );
-// }
-
-// function SignOutButton() {
-//   const signOut = () => {
-//     cAuth.signOut();
-//   };
-
-//   return <Button onClick={signOut}>Sign Out</Button>;
-// }

@@ -1,7 +1,5 @@
 import { Button, Group, Header } from "@mantine/core";
-import { signInWithPopup } from "firebase/auth";
-import { cAuth, googleAuthProvider } from "../../../firebase/clientConfig";
-import { createUserRecord } from "../../../firebase/queries/userRecord";
+import { cAuth } from "../../../firebase/clientConfig";
 import ColorModeSwitcher from "../../components/ColorModeSwitcher";
 import LogoStack from "../../components/LogoStack";
 import AddQuoteButton from "./AddQuoteButton";
@@ -27,10 +25,19 @@ export default function TopNav() {
       <LogoStack />
       <AppSearch />
       <Group spacing="xs">
+        <SignOutButton />
         <ColorModeSwitcher />
         <UserPageLink />
         <AddQuoteButton />
       </Group>
     </Header>
   );
+}
+
+function SignOutButton() {
+  const signOut = () => {
+    cAuth.signOut();
+  };
+
+  return <Button onClick={signOut}>Sign Out</Button>;
 }
