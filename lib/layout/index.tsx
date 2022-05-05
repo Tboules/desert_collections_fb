@@ -4,7 +4,7 @@ import TopNav from "./TopNav";
 
 const containerStyles: React.CSSProperties = {
   marginTop: "80px",
-  maxWidth: "1440px",
+  // maxWidth: "1440px",
   minHeight: "calc(100vh - 80px)",
 };
 
