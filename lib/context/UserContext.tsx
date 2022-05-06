@@ -31,6 +31,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (user) {
       retrieveAndValidateUserRecord(user);
+      console.log(user);
     }
 
     if (!user) {

@@ -1,5 +1,7 @@
 import { Button, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { cAuth } from "../../../../firebase/clientConfig";
 import signInFormSchema from "../../../../lib/yupFormSchemas/signInFormSchema";
 
 interface FormValues {
@@ -16,8 +18,12 @@ export default function CustomSignInForm() {
     },
   });
 
-  const signIn = (values: FormValues) => {
-    console.log(values);
+  const signIn = async (values: FormValues) => {
+    try {
+      await signInWithEmailAndPassword(cAuth, values.email, values.password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
