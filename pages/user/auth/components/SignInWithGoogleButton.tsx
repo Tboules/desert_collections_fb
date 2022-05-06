@@ -6,9 +6,7 @@ import {
 } from "../../../../lib/hooks/useDesertCollectionSignIn";
 
 export default function SignInWithGoogleButton() {
-  const { providerIsGoogle, signIn } = useDesertCollectionSignIn(
-    SignInProvider.GOOGLE
-  );
+  const { signIn } = useDesertCollectionSignIn(SignInProvider.GOOGLE);
 
   return (
     <Button

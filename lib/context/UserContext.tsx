@@ -6,7 +6,7 @@ import { cAuth } from "../../firebase/clientConfig";
 import { getUserRecord } from "../../firebase/queries/userRecord";
 
 interface Props {
-  dcUser: UserRecord | null;
+  userRecord: UserRecord | null;
   loading: boolean;
 }
 
@@ -14,7 +14,7 @@ export const UserContext = createContext<Props | null>(null);
 
 export const UserContextProvider: React.FC = ({ children }) => {
   const router = useRouter();
-  const [dcUser, setDcUser] = useState<UserRecord | null>(null);
+  const [userRecord, setDcUser] = useState<UserRecord | null>(null);
   const [user, loading, error] = useAuthState(cAuth);
 
   const retrieveAndValidateUserRecord = async (u: User) => {
@@ -23,7 +23,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
       setDcUser(userRecord);
     }
 
-    if (!userRecord) {
+    if (!userRecord && user) {
       router.push(`/user/create-profile`);
     }
   };
@@ -35,11 +35,12 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
     if (!user) {
       setDcUser(null);
+      console.log("singing out");
     }
-  }, [user, loading, error]);
+  }, [user]);
 
   return (
-    <UserContext.Provider value={{ dcUser, loading }}>
+    <UserContext.Provider value={{ userRecord, loading }}>
       {children}
     </UserContext.Provider>
   );
