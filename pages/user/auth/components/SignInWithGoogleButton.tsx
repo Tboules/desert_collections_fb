@@ -1,19 +1,19 @@
 import { Button } from "@mantine/core";
+import { signInWithPopup } from "firebase/auth";
 import { BrandGoogle } from "tabler-icons-react";
-import {
-  SignInProvider,
-  useDesertCollectionSignIn,
-} from "../../../../lib/hooks/useDesertCollectionSignIn";
+import { cAuth, googleAuthProvider } from "../../../../firebase/clientConfig";
 
 export default function SignInWithGoogleButton() {
-  const { signIn } = useDesertCollectionSignIn(SignInProvider.GOOGLE);
+  async function signInWithGoogle() {
+    await signInWithPopup(cAuth, googleAuthProvider);
+  }
 
   return (
     <Button
       leftIcon={<BrandGoogle />}
       style={{ width: "100%", height: "50px" }}
       variant="outline"
-      onClick={signIn}
+      onClick={signInWithGoogle}
     >
       Google Sign-In
     </Button>
