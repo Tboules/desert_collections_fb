@@ -8,6 +8,7 @@ import { getUserRecord } from "../../firebase/queries/userRecord";
 interface Props {
   userRecord: UserRecord | null;
   loading: boolean;
+  user: User | null | undefined;
 }
 
 export const UserContext = createContext<Props | null>(null);
@@ -39,7 +40,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ userRecord, loading }}>
+    <UserContext.Provider value={{ userRecord, user, loading }}>
       {children}
     </UserContext.Provider>
   );
