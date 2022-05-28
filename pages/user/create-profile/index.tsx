@@ -1,10 +1,9 @@
 import {
   Button,
   Center,
-  Divider,
+  Grid,
   Group,
   Paper,
-  Stack,
   TextInput,
   Title,
 } from "@mantine/core";
@@ -28,34 +27,65 @@ const CreateProfilePage: NextPage<Props> = () => {
     >
       <Paper
         shadow="sm"
-        p={20}
-        style={{ width: "90%", minWidth: "320px", maxWidth: "800px" }}
+        style={{
+          width: "98%",
+          minWidth: "320px",
+          maxWidth: "700px",
+          padding: "30px 16px",
+        }}
       >
         <Title align="center" style={{ marginBottom: "2rem" }}>
           Create Your Profile
         </Title>
-        {/* username, first, last, dob, phone, church */}
         <form>
-          <Stack spacing={16}>
-            <TextInput label="Username" />
-
-            <Group grow mt="sm">
-              <TextInput label="First Name" />
-              <TextInput label="Last Name" />
-            </Group>
-            <Group grow>
-              <DatePicker label="Date of Birth" />
+          <Grid gutter="sm">
+            <Grid.Col span={12} mb="sm">
               <TextInput
-                label="phone Number"
+                label="Username"
+                placeholder="Choose a username"
+                required
+              />
+            </Grid.Col>
+
+            <Grid.Col xs={12} sm={6}>
+              <TextInput label="First Name" placeholder="First Name" />
+            </Grid.Col>
+
+            <Grid.Col xs={12} sm={6}>
+              <TextInput label="Last Name" placeholder="Last Name" />
+            </Grid.Col>
+
+            <Grid.Col xs={12} sm={6}>
+              <DatePicker
+                label="Date of Birth"
+                placeholder="Select Date of Birth"
+              />
+            </Grid.Col>
+
+            <Grid.Col xs={12} sm={6}>
+              <TextInput
+                label="Phone Number"
+                placeholder="Phone Number"
                 value={phone}
                 onChange={(e) =>
                   setPhone(formatPhoneNumber(e.currentTarget.value))
                 }
               />
-            </Group>
-            <TextInput label="Which Church do you attend?" />
-            <Button mt="lg">Create Profile</Button>
-          </Stack>
+            </Grid.Col>
+
+            <Grid.Col span={12}>
+              <TextInput
+                label="Which Church do you attend?"
+                placeholder="Please spell out the full name of your Church"
+              />
+            </Grid.Col>
+
+            <Grid.Col span={12}>
+              <Button style={{ width: "100%" }} mt="lg">
+                Create Profile
+              </Button>
+            </Grid.Col>
+          </Grid>
         </form>
       </Paper>
     </Center>
